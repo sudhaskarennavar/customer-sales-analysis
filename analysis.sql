@@ -1,10 +1,12 @@
 analysis.sql
 
 1)-- Top 5 Spending Customers
-SELECT name, total_amount
-FROM customers
-ORDER BY total_amount DESC
-LIMIT 5;
+select c.customer_id,c.name,sum(o.total_amount) as Total_spent
+from customers c
+join orders o on c.customer_id=o.customer_id
+Group by c.customer_id, c.name
+order by Total_spent DESC
+limit 5;
 
 2)-- Monthly Revenue in 2024
 SELECT DATE_FORMAT(order_date, '%Y-%m') AS month,
